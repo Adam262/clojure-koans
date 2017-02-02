@@ -18,13 +18,19 @@
 (defn recursive-reverse [coll] (
   if (= (count coll) 1)
     coll
+    (cons (last coll) (recursive-reverse (butlast coll)))))
 
-      ))
-
-(defn factorial [n] (
-  if (= n 0)
+#_(defn factorial [n] (
+  if (zero? n)
     1
     (* n (factorial (dec n)))))
+
+(defn factorial [n]
+  (loop [n n
+          acc 1]
+    (if (zero? n) 
+      acc
+      (recur (dec n) (* acc n)))))
 
 (meditations
   "Recursion ends with a base case"
